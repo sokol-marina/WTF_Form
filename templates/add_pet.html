@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Pet Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card-img-top {
+      height: 300px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+   <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="alert alert-dismissible fade show">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <h1 class="text-center mb-4">Add New Pet</h1>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="row g-3">
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            {{ field(class="form-control", placeholder=field.label.text) }}
+            <label for="{{ field.id }}">{{ field.label }}</label>
+            {% for err in field.errors %}
+            <div class="text-danger mt-1">{{ err }}</div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="d-grid gap-2 col-6 mx-auto mt-4">
+        <button class="btn btn-success btn-lg" type="submit">Submit</button>
+        <a href="/" class="btn btn-secondary btn-lg">Cancel</a>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

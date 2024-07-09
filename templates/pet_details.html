@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ pet.name }} Details</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card-img-top {
+      height: 400px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <img src="{{ pet.photo_url }}" class="card-img-top" alt="{{ pet.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ pet.name }}</h5>
+          <p class="card-text"><strong>Species:</strong> {{ pet.species }}</p>
+          <p class="card-text"><strong>Age:</strong> {{ pet.age }}</p>
+          <p class="card-text"><strong>Notes:</strong> {{ pet.notes }}</p>
+          <p class="card-text">
+            <strong class="{{ 'text-success' if pet.available else 'text-danger' }}">
+              {{ 'Available' if pet.available else 'Not Available' }}
+            </strong>
+          </p>
+          <a href='/{{pet.id}}/apply' class="btn btn-primary">Apply for a Pet</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
